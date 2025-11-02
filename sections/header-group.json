@@ -26,8 +26,8 @@
         "announcement_YUnUr9": {
           "type": "announcement",
           "settings": {
-            "phone_number": "+1 (234) 567-8900",
-            "email": "hello@example.com",
+            "phone_number": "",
+            "email": "",
             "text": "New offer",
             "link": ""
           }
