@@ -1,2 +1,2 @@
-[environment.development]
-store="https://sandeep-watches-store.myshopify.com/"
+[environments.development]
+store= "https://sandeep-watches-store.myshopify.com/"

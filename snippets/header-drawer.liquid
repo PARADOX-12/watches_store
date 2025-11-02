@@ -19,6 +19,44 @@
     <div id="menu-drawer" class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}">
       <div class="menu-drawer__inner-container">
         <div class="menu-drawer__navigation-container">
+          <span class="login-link-wrapper">
+             {%- if shop.customer_accounts_enabled -%}
+                <a
+                  href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
+                  class="menu-drawer__account link focus-inset h5 medium-hide large-up-hide"
+                  rel="nofollow"
+                >
+                  {%- if section.settings.enable_customer_avatar -%}
+                    <account-icon>
+                      {%- if customer and customer.has_avatar? -%}
+                        {{ customer | avatar }}
+                      {%- else -%}
+                        <span class="svg-wrapper">
+                          {{- 'icon-account.svg' | inline_asset_content -}}
+                        </span>
+                      {%- endif -%}
+                    </account-icon>
+                  {%- else -%}
+                    <span class="svg-wrapper">
+                      {{- 'icon-account.svg' | inline_asset_content -}}
+                    </span>
+                  {%- endif -%}
+                  {%- liquid
+                    if customer
+                      echo 'customer.account_fallback' | t
+                    else
+                      echo 'customer.log_in' | t
+                    endif
+                  -%}
+                </a>
+              {%- endif -%}
+                <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                            <span class="svg-wrapper">
+                              {{- 'icon-close.svg' | inline_asset_content -}}
+                            </span>
+                            {{ link.title | escape }}
+                </button>
+          </span>
           <nav class="menu-drawer__navigation">
             <ul class="menu-drawer__menu has-submenu list-menu" role="list">
               {%- for link in section.settings.menu.links -%}
@@ -43,12 +81,6 @@
                         tabindex="-1"
                       >
                         <div class="menu-drawer__inner-submenu">
-                          <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
-                            <span class="svg-wrapper">
-                              {{- 'icon-arrow.svg' | inline_asset_content -}}
-                            </span>
-                            {{ link.title | escape }}
-                          </button>
                           <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
                             {%- for childlink in link.links -%}
                               <li>
@@ -136,36 +168,6 @@
             </ul>
           </nav>
           <div class="menu-drawer__utility-links">
-            {%- if shop.customer_accounts_enabled -%}
-              <a
-                href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
-                class="menu-drawer__account link focus-inset h5 medium-hide large-up-hide"
-                rel="nofollow"
-              >
-                {%- if section.settings.enable_customer_avatar -%}
-                  <account-icon>
-                    {%- if customer and customer.has_avatar? -%}
-                      {{ customer | avatar }}
-                    {%- else -%}
-                      <span class="svg-wrapper">
-                        {{- 'icon-account.svg' | inline_asset_content -}}
-                      </span>
-                    {%- endif -%}
-                  </account-icon>
-                {%- else -%}
-                  <span class="svg-wrapper">
-                    {{- 'icon-account.svg' | inline_asset_content -}}
-                  </span>
-                {%- endif -%}
-                {%- liquid
-                  if customer
-                    echo 'customer.account_fallback' | t
-                  else
-                    echo 'customer.log_in' | t
-                  endif
-                -%}
-              </a>
-            {%- endif -%}
             {%- if localization.available_countries or localization.available_languages -%}
               <div class="menu-drawer__localization header-localization">
                 {%- if localization.available_countries and localization.available_countries.size > 1 -%}
@@ -287,6 +289,28 @@
                 </li>
               {%- endif -%}
             </ul>
+            <div class="mobile-menu-contact">
+              {%- for section in sections -%}
+                {%- if section.type == 'announcement-bar' -%}
+                  {%- for block in section.blocks -%}
+                    {%- if forloop.first -%}
+                      {%- if block.settings.phone_number != blank -%}
+                        <a href="tel:{{ block.settings.phone_number | remove: ' ' | remove: '-' | remove: '(' | remove: ')' }}" class="mobile-menu-contact__item">
+                          {%- render 'icon-phone' -%}
+                          <span>{{ block.settings.phone_number }}</span>
+                        </a>
+                      {%- endif -%} 
+                   {%- if block.settings.email != blank -%}
+                        <a href="mailto:{{ block.settings.email }}" class="mobile-menu-contact__item">
+                          {%- render 'icon-email' -%}
+                          <span>{{ block.settings.email }}</span>
+                        </a>
+                      {%- endif -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- endif -%}
+              {%- endfor -%}
+            </div> 
           </div>
         </div>
       </div>
