@@ -17,6 +17,8 @@
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
+            "phone_number": "+1 (234) 567-8900",
+            "email": "hello@example.com",
             "text": "Welcome to our store",
             "link": ""
           }
