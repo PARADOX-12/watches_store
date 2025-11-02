@@ -22,10 +22,20 @@
             "text": "Welcome to our store",
             "link": ""
           }
+        },
+        "announcement_YUnUr9": {
+          "type": "announcement",
+          "settings": {
+            "phone_number": "+1 (234) 567-8900",
+            "email": "hello@example.com",
+            "text": "New offer",
+            "link": ""
+          }
         }
       },
       "block_order": [
-        "announcement-bar-0"
+        "announcement-bar-0",
+        "announcement_YUnUr9"
       ],
       "settings": {
         "auto_rotate": false,
