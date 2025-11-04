@@ -148,7 +148,9 @@
                               </li>
                             {%- endfor -%}
                           </ul>
+                         
                         </div>
+                        
                       </div>
                     </details>
                   {%- else -%}
@@ -167,6 +169,44 @@
               {%- endfor -%}
             </ul>
           </nav>
+         <span class="contact-info">
+             <a id="phone-link" href="#" aria-label="Call us">
+              {% render 'icon-phone' %}
+            <span id="phone-text"></span>
+              </a>
+              <a id="email-link" href="#" aria-label="Email us">
+                {% render 'icon-email' %}
+                <span id="email-text"></span>
+              </a>
+            </span>
+
+            {% javascript %}
+              const allContactContent = document.querySelectorAll('.announcement-bar__contact');
+
+              const phoneNumberContent = allContactContent[0]?.textContent
+                ?.trim()
+                .split('|')[0]
+                ?.trim() || "";
+
+              const emailContent = allContactContent[0]?.textContent
+                ?.trim()
+                .split('|')[1]
+                ?.trim() || "";
+
+              // update elements
+              if (phoneNumberContent) {
+                const phoneLink = document.getElementById('phone-link');
+                phoneLink.href = `tel:${phoneNumberContent.replace(/[ \-\(\)]/g, '')}`;
+                document.getElementById('phone-text').textContent = phoneNumberContent;
+              }
+
+              if (emailContent) {
+                const emailLink = document.getElementById('email-link');
+                emailLink.href = `mailto:${emailContent}`;
+                document.getElementById('email-text').textContent = emailContent;
+              }
+            {% endjavascript %}
+
           <div class="menu-drawer__utility-links">
             {%- if localization.available_countries or localization.available_languages -%}
               <div class="menu-drawer__localization header-localization">
@@ -302,7 +342,6 @@
                       {%- endif -%} 
                    {%- if block.settings.email != blank -%}
                         <a href="mailto:{{ block.settings.email }}" class="mobile-menu-contact__item">
-                          {%- render 'icon-email' -%}
                           <span>{{ block.settings.email }}</span>
                         </a>
                       {%- endif -%}

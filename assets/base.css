@@ -2210,9 +2210,8 @@ input[type='checkbox'] {
 
 @media screen and (min-width: 990px) {
   body:has(.section-header .header:not(.drawer-menu)) .utility-bar .page-width {
-   margin: auto;
-   width: 100%;
-   padding: 10px 24px;
+   height: 40px;
+   left: 40px;
   }
 
   .announcement-bar-slider {
@@ -3660,3 +3659,27 @@ details-disclosure > details {
  }
 }
 
+.contact-info{
+  background-color: #000; /* black background */
+  padding: 0.8rem 1rem;
+  display: flex;
+  flex-direction: column; /* stack phone + email vertically */
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.contact-info a{
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: #ffffff;
+  text-decoration: none;
+  white-space: nowrap;
+  font-weight: 400;
+}
+
+.contact-info svg{
+    width: 1.4rem;
+  height: 1.4rem;
+  fill: #ffffff;
+}
