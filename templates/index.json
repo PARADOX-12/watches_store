@@ -9,20 +9,60 @@
  */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "slideshow_3w9NrA": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_P6RkEU": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/3rd.1920_x_667px_9.jpg",
+            "image_overlay_opacity": 0,
+            "heading": "Image slide",
+            "heading_size": "h1",
+            "subheading": "Tell your brand's story through images",
+            "button_label": "Button label",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": ""
+          }
+        },
+        "slide_xVLfk4": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/3rd.1920_x_667px_9.jpg",
+            "image_overlay_opacity": 0,
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "",
+            "button_label": "",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_P6RkEU",
+        "slide_xVLfk4"
+      ],
+      "name": "t:sections.slideshow.presets.name",
       "settings": {
-        "image": "shopify://shop_images/3rd.1920_x_667px_9.jpg",
-        "image_overlay_opacity": 0,
-        "image_height": "medium",
+        "layout": "full_bleed",
+        "slide_height": "medium",
+        "slider_visual": "counter",
+        "auto_rotate": false,
+        "change_slides_speed": 5,
         "image_behavior": "none",
-        "desktop_content_position": "bottom-center",
-        "desktop_content_alignment": "center",
-        "show_text_box": false,
-        "color_scheme": "scheme-3",
-        "stack_images_on_mobile": false,
-        "mobile_content_alignment": "center",
-        "show_text_below": false
+        "show_text_below": true,
+        "accessibility_info": "Slideshow about our brand"
       }
     },
     "featured_collection": {
@@ -55,7 +95,7 @@
     }
   },
   "order": [
-    "image_banner",
+    "slideshow_3w9NrA",
     "featured_collection"
   ]
 }
