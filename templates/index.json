@@ -30,16 +30,16 @@
             "color_scheme": ""
           }
         },
-        "slide_xVLfk4": {
+        "slide_cNQFxD": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/3rd.1920_x_667px_9.jpg",
+            "image": "shopify://shop_images/1920_x_667px_9_1.webp",
             "image_overlay_opacity": 0,
             "heading": "",
             "heading_size": "h1",
             "subheading": "",
             "button_label": "",
-            "link": "",
+            "link": "shopify://collections",
             "button_style_secondary": false,
             "show_text_box": true,
             "box_align": "middle-center",
@@ -51,7 +51,7 @@
       },
       "block_order": [
         "slide_P6RkEU",
-        "slide_xVLfk4"
+        "slide_cNQFxD"
       ],
       "name": "t:sections.slideshow.presets.name",
       "settings": {
