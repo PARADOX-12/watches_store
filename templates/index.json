@@ -9,10 +9,10 @@
  */
 {
   "sections": {
-    "custom_slideshow_A8jt8W": {
+    "custom_slideshow_dpfPVa": {
       "type": "custom-slideshow",
       "blocks": {
-        "slide_C8grHY": {
+        "slide_mxhhXe": {
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/3rd.1920_x_667px_9.jpg",
@@ -22,7 +22,7 @@
         }
       },
       "block_order": [
-        "slide_C8grHY"
+        "slide_mxhhXe"
       ],
       "name": "Custom Slideshow",
       "settings": {}
@@ -57,7 +57,7 @@
     }
   },
   "order": [
-    "custom_slideshow_A8jt8W",
+    "custom_slideshow_dpfPVa",
     "featured_collection"
   ]
 }
