@@ -1,0 +1,99 @@
+<section class="custom-slideshow">
+  <div class="slideshow-container" id="slideshow-{{ section.id }}">
+
+    {% for block in section.blocks %}
+      <a 
+        class="slide"
+        href="{{ block.settings.collection | default: '#' }}" 
+        {{ block.shopify_attributes }}
+      >
+        <img
+          src="{{ block.settings.image | img_url: '2000x' }}"
+          alt="{{ block.settings.alt | escape }}"
+        >
+      </a>
+    {% endfor %}
+
+    <!-- Arrows -->
+    <button class="slide-arrow prev" onclick="prevSlide('{{ section.id }}')">&#10094;</button>
+    <button class="slide-arrow next" onclick="nextSlide('{{ section.id }}')">&#10095;</button>
+
+  </div>
+</section>
+
+<script>
+  let slideIndex_{{ section.id }} = 0;
+  const slideTimer_{{ section.id }} = 5000; // 5 sec
+
+  function showSlides_{{ section.id }}() {
+    const slides = document.querySelectorAll('#slideshow-{{ section.id }} .slide');
+    slides.forEach((s) => s.style.display = 'none');
+    slideIndex_{{ section.id }}++;
+
+    if (slideIndex_{{ section.id }} > slides.length) {
+      slideIndex_{{ section.id }} = 1;
+    }
+
+    slides[slideIndex_{{ section.id }} - 1].style.display = 'block';
+
+    setTimeout(showSlides_{{ section.id }}, slideTimer_{{ section.id }});
+  }
+
+  function nextSlide(id) {
+    const slides = document.querySelectorAll('#slideshow-' + id + ' .slide');
+    slideIndex_{{ section.id }}++;
+    if (slideIndex_{{ section.id }} > slides.length) slideIndex_{{ section.id }} = 1;
+
+    slides.forEach((s) => s.style.display = 'none');
+    slides[slideIndex_{{ section.id }} - 1].style.display = 'block';
+  }
+
+  function prevSlide(id) {
+    const slides = document.querySelectorAll('#slideshow-' + id + ' .slide');
+    slideIndex_{{ section.id }}--;
+    if (slideIndex_{{ section.id }} < 1) slideIndex_{{ section.id }} = slides.length;
+
+    slides.forEach((s) => s.style.display = 'none');
+    slides[slideIndex_{{ section.id }} - 1].style.display = 'block';
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    showSlides_{{ section.id }}();
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Custom Slideshow",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Slide image"
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Alt text"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Link to collection"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Custom Slideshow"
+    }
+  ]
+}
+{% endschema %}
