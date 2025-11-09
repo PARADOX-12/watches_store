@@ -1,15 +1,17 @@
 <section class="custom-slideshow">
   <div class="slideshow-container" id="slideshow-{{ section.id }}">
-
     {% for block in section.blocks %}
-      <a 
+      <a
         class="slide"
-        href="{{ block.settings.collection | default: '#' }}" 
+        href="{% if block.settings.collection != blank %}{{ block.settings.collection.url }}{% else %}#{% endif %}"
         {{ block.shopify_attributes }}
       >
         <img
           src="{{ block.settings.image | img_url: '2000x' }}"
           alt="{{ block.settings.alt | escape }}"
+          width="{{ block.settings.image.width }}"
+          height="{{ block.settings.image.height }}"
+          loading="lazy"
         >
       </a>
     {% endfor %}
@@ -17,7 +19,6 @@
     <!-- Arrows -->
     <button class="slide-arrow prev" onclick="prevSlide('{{ section.id }}')">&#10094;</button>
     <button class="slide-arrow next" onclick="nextSlide('{{ section.id }}')">&#10095;</button>
-
   </div>
 </section>
 
