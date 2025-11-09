@@ -81,58 +81,53 @@
 let index_{{ section.id }} = 0;
 
 let slideIndex_{{ section.id }} = 0;
+let slideIndex_{{ section.id }} = 0;
 
-function showSlides_{{ section.id }}() {
+// Show slide by index
+function showSlide_{{ section.id }}(n) {
   const slides = document.querySelectorAll('#slideshow-{{ section.id }} .slide');
 
-  if (slides.length === 0) return;     // prevents crash
-  if (slides.length === 1) {           // only 1 slide → always show
-    slides[0].style.display = "block";
-    return;
-  }
+  if (slides.length === 0) return;
 
-  // hide all slides
+  // Fix index overflow
+  if (n >= slides.length) slideIndex_{{ section.id }} = 0;
+  if (n < 0) slideIndex_{{ section.id }} = slides.length - 1;
+
+  // Hide all slides
   slides.forEach(s => s.style.display = "none");
 
-  // move to next slide
-  slideIndex_{{ section.id }}++;
-
-  // loop back if index is too high
-  if (slideIndex_{{ section.id }} >= slides.length) {
-    slideIndex_{{ section.id }} = 0;
-  }
-
-  // show the correct slide
+  // Show active slide
   slides[slideIndex_{{ section.id }}].style.display = "block";
-
-  // auto slide every 4 sec
-  setTimeout(showSlides_{{ section.id }}, 4000);  
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  showSlides_{{ section.id }}();
-});
+// Auto-slide function
+function autoSlide_{{ section.id }}() {
+  slideIndex_{{ section.id }}++;
+  showSlide_{{ section.id }}(slideIndex_{{ section.id }});
+}
 
-
+// Next button
 function nextSlide_{{ section.id }}() {
-  index_{{ section.id }}++;
-  showSlide_{{ section.id }}(index_{{ section.id }});
+  slideIndex_{{ section.id }}++;
+  showSlide_{{ section.id }}(slideIndex_{{ section.id }});
 }
 
+// Prev button
 function prevSlide_{{ section.id }}() {
-  index_{{ section.id }}--;
-  showSlide_{{ section.id }}(index_{{ section.id }});
+  slideIndex_{{ section.id }}--;
+  showSlide_{{ section.id }}(slideIndex_{{ section.id }});
 }
+
+// On page load → show first slide
+document.addEventListener("DOMContentLoaded", () => {
+  showSlide_{{ section.id }}(slideIndex_{{ section.id }});
+});
 
 // Auto slide every 4 seconds
 setInterval(() => {
-  nextSlide_{{ section.id }}();
+  autoSlide_{{ section.id }}();
 }, 4000);
 
-// Load first slide
-document.addEventListener("DOMContentLoaded", () => {
-  showSlide_{{ section.id }}(index_{{ section.id }});
-});
 </script>
 
 
