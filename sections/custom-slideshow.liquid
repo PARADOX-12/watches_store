@@ -20,11 +20,6 @@
     display: block;
   }
 
-  .slide img {
-    width: 100%;
-    height: auto;
-  }
-
   /* Arrows */
   .arrow {
     position: absolute;
@@ -55,12 +50,15 @@
         href="{% if block.settings.collection %}{{ block.settings.collection.url }}{% else %}#{% endif %}"
         {{ block.shopify_attributes }}
       >
+        {% assign img_width = 400 %}
+        {% assign img_height = 300 %}
+        <!-- Calculate height based on aspect ratio (e.g., 4:3) -->
         <img
-          src="{{ block.settings.image | image_url: width: 2000 }}"
-          alt="{{ block.settings.alt | escape }}"
-          width="{{ block.settings.image | image_width }}"
-          height="{{ block.settings.image | image_height }}"
-          loading="lazy"
+          src="{{ image | img_url: '400x' }}"
+          width="{{ img_width }}"
+          height="{{ img_height }}"
+          alt="{{ image.alt }}"
+          style="max-width: 100%; height: auto;"
         >
       </a>
     {% endfor %}
