@@ -80,17 +80,39 @@
 <script>
 let index_{{ section.id }} = 0;
 
-function showSlide_{{ section.id }}(n) {
+let slideIndex_{{ section.id }} = 0;
+
+function showSlides_{{ section.id }}() {
   const slides = document.querySelectorAll('#slideshow-{{ section.id }} .slide');
-  if (!slides.length) return;
 
-  slides.forEach(slide => slide.style.display = 'none');
+  if (slides.length === 0) return;     // prevents crash
+  if (slides.length === 1) {           // only 1 slide → always show
+    slides[0].style.display = "block";
+    return;
+  }
 
-  if (n >= slides.length) index_{{ section.id }} = 0;
-  if (n < 0) index_{{ section.id }} = slides.length - 1;
+  // hide all slides
+  slides.forEach(s => s.style.display = "none");
 
-  slides[index_{{ section.id }}].style.display = 'block';
+  // move to next slide
+  slideIndex_{{ section.id }}++;
+
+  // loop back if index is too high
+  if (slideIndex_{{ section.id }} >= slides.length) {
+    slideIndex_{{ section.id }} = 0;
+  }
+
+  // show the correct slide
+  slides[slideIndex_{{ section.id }}].style.display = "block";
+
+  // auto slide every 4 sec
+  setTimeout(showSlides_{{ section.id }}, 4000);  
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  showSlides_{{ section.id }}();
+});
+
 
 function nextSlide_{{ section.id }}() {
   index_{{ section.id }}++;
