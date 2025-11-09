@@ -85,6 +85,7 @@ let slideIndex_{{ section.id }} = 0;
 // Show slide by index
 function showSlide_{{ section.id }}(n) {
   const slides = document.querySelectorAll('#slideshow-{{ section.id }} .slide');
+  console.log(slides, "+++++++++++++++++++++++")
 
   if (slides.length === 0) return;
 
