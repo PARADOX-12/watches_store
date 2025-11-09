@@ -1,6 +1,7 @@
 <section class="custom-slideshow">
   <div class="slideshow-container" id="slideshow-{{ section.id }}">
     {% for block in section.blocks %}
+      <div style="padding:40px; text-align:center; background:#f4f4f4;">Add slides to display the slideshow.</div>
       <a
         class="slide"
         href="{% if block.settings.collection != blank %}{{ block.settings.collection.url }}{% else %}#{% endif %}"
