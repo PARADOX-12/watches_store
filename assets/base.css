@@ -3696,18 +3696,24 @@ details-disclosure > details {
   width: 100%;
   position: relative;
 }
-
+/* Slider container */
 .slideshow-container {
   position: relative;
   width: 100%;
+  height: auto;
   overflow: hidden;
 }
 
+/* Each slide should overlap (NOT stack) */
 .slide {
-  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  display: none; /* JS will show the active slide */
 }
 
+/* Make image responsive */
 .slide img {
   width: 100%;
   height: auto;
@@ -3719,25 +3725,23 @@ details-disclosure > details {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  padding: 12px 18px;
+  padding: 14px 20px;
   font-size: 32px;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.4);
   border: none;
   cursor: pointer;
-  color: #000;
-  backdrop-filter: blur(4px);
   border-radius: 50%;
-  z-index: 10;
+  z-index: 20;
 }
 
-.slide-arrow.prev {
-  left: 15px;
-}
-
-.slide-arrow.next {
-  right: 15px;
-}
+.slide-arrow.prev { left: 20px; }
+.slide-arrow.next { right: 20px; }
 
 .slide-arrow:hover {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* Ensure slideshow has a minimum height until the images load */
+.slideshow-container {
+  min-height: 300px; /* optional */
 }

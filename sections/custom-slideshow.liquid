@@ -33,43 +33,42 @@
 
 <script>
   let slideIndex_{{ section.id }} = 0;
-  const slideTimer_{{ section.id }} = 5000; // 5 sec
 
-  function showSlides_{{ section.id }}() {
-    const slides = document.querySelectorAll('#slideshow-{{ section.id }} .slide');
-    slides.forEach((s) => s.style.display = 'none');
-    slideIndex_{{ section.id }}++;
+function showSlides_{{ section.id }}() {
+  const slides = document.querySelectorAll('#slideshow-{{ section.id }} .slide');
+  slides.forEach((s) => (s.style.display = 'none'));
 
-    if (slideIndex_{{ section.id }} > slides.length) {
-      slideIndex_{{ section.id }} = 1;
-    }
+  slideIndex_{{ section.id }}++;
+  if (slideIndex_{{ section.id }} > slides.length) slideIndex_{{ section.id }} = 1;
 
-    slides[slideIndex_{{ section.id }} - 1].style.display = 'block';
+  slides[slideIndex_{{ section.id }} - 1].style.display = 'block';
 
-    setTimeout(showSlides_{{ section.id }}, slideTimer_{{ section.id }});
-  }
+  setTimeout(showSlides_{{ section.id }}, 5000); // auto-slide
+}
 
-  function nextSlide(id) {
-    const slides = document.querySelectorAll('#slideshow-' + id + ' .slide');
-    slideIndex_{{ section.id }}++;
-    if (slideIndex_{{ section.id }} > slides.length) slideIndex_{{ section.id }} = 1;
+// Arrow buttons
+function nextSlide(id) {
+  const slides = document.querySelectorAll('#slideshow-' + id + ' .slide');
+  slides.forEach((s) => (s.style.display = 'none'));
 
-    slides.forEach((s) => s.style.display = 'none');
-    slides[slideIndex_{{ section.id }} - 1].style.display = 'block';
-  }
+  slideIndex_{{ section.id }}++;
+  if (slideIndex_{{ section.id }} > slides.length) slideIndex_{{ section.id }} = 1;
 
-  function prevSlide(id) {
-    const slides = document.querySelectorAll('#slideshow-' + id + ' .slide');
-    slideIndex_{{ section.id }}--;
-    if (slideIndex_{{ section.id }} < 1) slideIndex_{{ section.id }} = slides.length;
+  slides[slideIndex_{{ section.id }} - 1].style.display = 'block';
+}
 
-    slides.forEach((s) => s.style.display = 'none');
-    slides[slideIndex_{{ section.id }} - 1].style.display = 'block';
-  }
+function prevSlide(id) {
+  const slides = document.querySelectorAll('#slideshow-' + id + ' .slide');
+  slides.forEach((s) => (s.style.display = 'none'));
 
-  document.addEventListener("DOMContentLoaded", function() {
-    showSlides_{{ section.id }}();
-  });
+  slideIndex_{{ section.id }}--;
+  if (slideIndex_{{ section.id }} < 1) slideIndex_{{ section.id }} = slides.length;
+
+  slides[slideIndex_{{ section.id }} - 1].style.display = 'block';
+}
+
+document.addEventListener("DOMContentLoaded", showSlides_{{ section.id }});
+
 </script>
 
 {% schema %}
