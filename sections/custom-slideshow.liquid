@@ -83,15 +83,11 @@
 
 
 <script>
-let index_{{ section.id }} = 0;
-
-let slideIndex_{{ section.id }} = 0;
 let slideIndex_{{ section.id }} = 0;
 
 // Show slide by index
 function showSlide_{{ section.id }}(n) {
   const slides = document.querySelectorAll('#slideshow-{{ section.id }} .slide');
-  console.log(slides, "+++++++++++++++++++++++++++++++++++++++")
 
   if (slides.length === 0) return;
 
@@ -108,22 +104,19 @@ function showSlide_{{ section.id }}(n) {
 
 // Auto-slide function
 function autoSlide_{{ section.id }}() {
-  const check = slideIndex_{{ section.id }}++;
-  console.log(check, "-----------------------------------------")
+  slideIndex_{{ section.id }}++;
   showSlide_{{ section.id }}(slideIndex_{{ section.id }});
 }
 
 // Next button
 function nextSlide_{{ section.id }}() {
-  const next = slideIndex_{{ section.id }}++;
-  console.log(next, "==========================================")
+  slideIndex_{{ section.id }}++;
   showSlide_{{ section.id }}(slideIndex_{{ section.id }});
 }
 
 // Prev button
 function prevSlide_{{ section.id }}() {
-  const prev = slideIndex_{{ section.id }}--;
-  console.log(prev, "|||||||||||||||||||||||||||||||||||||||||||||||||")
+  slideIndex_{{ section.id }}--;
   showSlide_{{ section.id }}(slideIndex_{{ section.id }});
 }
 
