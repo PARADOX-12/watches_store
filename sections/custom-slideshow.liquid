@@ -1,9 +1,7 @@
 <section id="slideshow-{{ section.id }}" class="custom-slideshow">
-
   <div class="slides-wrapper">
-
     {% for block in section.blocks %}
-      <a 
+      <a
         class="slide"
         href="{% if block.settings.collection %}{{ block.settings.collection.url }}{% else %}#{% endif %}"
         {{ block.shopify_attributes }}
@@ -21,117 +19,127 @@
     <!-- Arrows -->
     <button class="arrow prev" onclick="prevSlide_{{ section.id }}()">&#10094;</button>
     <button class="arrow next" onclick="nextSlide_{{ section.id }}()">&#10095;</button>
-
   </div>
-
 </section>
 
-
 <style>
-    *{
-        margin: 0px;
-        padding: 0px
-    }
+      *{
+          margin: 0px;
+          padding: 0px
+      }
 
-#slideshow-{{ section.id }} {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
+  #slideshow-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
 
-.slides-wrapper {
-  position: relative;
-  width: 100%;
-  min-height: 300px; 
-}
+  .slides-wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 300px;
+  }
 
-.slide {
-  position : relative;
-  width: 100%;
-  top: 0;
-  left: 0;
-  display: flex;
-}
+  .slide {
+    position : relative;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+  }
 
-.slide img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
+  .slide img {
+    width: 100%;
+    height: auto;
+    display: none;
+  }
 
-/* Arrows */
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255,255,255,0.4);
-  border: none;
-  font-size: 32px;
-  padding: 12px 18px;
-  cursor: pointer;
-  border-radius: 50%;
-  z-index: 10;
-}
+  .img.displayslide{
+      display:block
+  }
 
-.arrow.prev { left: 15px; }
-.arrow.next { right: 15px; }
+  /* Arrows */
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.4);
+    border: none;
+    font-size: 32px;
+    padding: 12px 18px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 10;
+  }
 
-.arrow:hover {
-  background: rgba(255,255,255,0.7);
-}
+  .arrow.prev { left: 15px; }
+  .arrow.next { right: 15px; }
+
+  .arrow:hover {
+    background: rgba(255,255,255,0.7);
+  }
 </style>
 
-
 <script>
-let slideIndex_{{ section.id }} = 0;
-
-// Show slide by index
-function showSlide_{{ section.id }}(n) {
+  let slideIndex_{{ section.id }} = 0;
   const slides = document.querySelectorAll('#slideshow-{{ section.id }} .slide');
 
-  if (slides.length === 0) return;
+  function initializeSlider() {
+      if (slides.length > 0){
+          slides[slideIndex_{{ section.id }}].classList.add("displayslide")
+           setInterval(() => {
+            autoSlide_{{ section.id }}();
+            }, 4000);
+      }  
+    }
 
-  // Fix index overflow
-  if (n >= slides.length) slideIndex_{{ section.id }} = 0;
-  if (n < 0) slideIndex_{{ section.id }} = slides.length - 1;
 
-  // Hide all slides
-  slides.forEach(s => s.style.display = "none");
+  // Show slide by index
+  function showSlide_{{ section.id }}(n) {
 
-  // Show active slide
-  slides[slideIndex_{{ section.id }}].style.display = "block";
-}
+    if (n >= slides.length)
+    {
+        slideIndex_{{ section.id }} = 0;
+    }
+    else if (n < 0) 
+    {
+        slideIndex_{{ section.id }} = slides.length - 1
+    };
 
-// Auto-slide function
-function autoSlide_{{ section.id }}() {
-  slideIndex_{{ section.id }}++;
-  showSlide_{{ section.id }}(slideIndex_{{ section.id }});
-}
+     slides.forEach(slide => 
+        slide.classList.remove("displayslide")
+    );
 
-// Next button
-function nextSlide_{{ section.id }}() {
-  slideIndex_{{ section.id }}++;
-  showSlide_{{ section.id }}(slideIndex_{{ section.id }});
-}
+    slides[slideIndex_{{ section.id }}].classList.add("displayslide")
 
-// Prev button
-function prevSlide_{{ section.id }}() {
-  slideIndex_{{ section.id }}--;
-  showSlide_{{ section.id }}(slideIndex_{{ section.id }});
-}
+  }
 
-// On page load → show first slide
-document.addEventListener("DOMContentLoaded", () => {
-  showSlide_{{ section.id }}(slideIndex_{{ section.id }});
-});
+  // Auto-slide function
+  function autoSlide_{{ section.id }}() {
+    slideIndex_{{ section.id }}++;
+    showSlide_{{ section.id }}(slideIndex_{{ section.id }});
+  }
 
-// Auto slide every 4 seconds
-setInterval(() => {
-  autoSlide_{{ section.id }}();
-}, 4000);
+  // Next button
+  function nextSlide_{{ section.id }}() {
+    slideIndex_{{ section.id }}++;
+    showSlide_{{ section.id }}(slideIndex_{{ section.id }});
+  }
 
+  // Prev button
+  function prevSlide_{{ section.id }}() {
+    slideIndex_{{ section.id }}--;
+    showSlide_{{ section.id }}(slideIndex_{{ section.id }});
+  }
+
+  // On page load → show first slide
+  document.addEventListener("DOMContentLoaded", initializeSlider);
+
+  // Auto slide every 4 seconds
+  setInterval(() => {
+    autoSlide_{{ section.id }}();
+  }, 4000);
 </script>
-
 
 {% schema %}
 {
@@ -149,8 +157,6 @@ setInterval(() => {
       ]
     }
   ],
-  "presets": [
-    { "name": "Custom Slideshow" }
-  ]
+  "presets": [{ "name": "Custom Slideshow" }]
 }
 {% endschema %}
