@@ -58,8 +58,8 @@
         <img
           src="{{ block.settings.image | image_url: width: 2000 }}"
           alt="{{ block.settings.alt | escape }}"
-          width="{{ block.settings.image.width }}"
-          height="{{ block.settings.image.height }}"
+          width="{{ block.settings.image | image_width }}"
+          height="{{ block.settings.image | image_height }}"
           loading="lazy"
         >
       </a>
