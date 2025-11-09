@@ -1,26 +1,26 @@
 <style>
-    .slide {
-  background: red;
-}
+      .slide {
+    background: red;
+  }
 </style>
 
 <section class="custom-slideshow">
   <div class="slideshow-container" id="slideshow-{{ section.id }}">
     {% for block in section.blocks %}
       <div style="padding:40px; text-align:center; background:#f4f4f4;">
-          <a
-        class="slide"
-        href="{% if block.settings.collection != blank %}{{ block.settings.collection.url }}{% else %}#{% endif %}"
-        {{ block.shopify_attributes }}
-      >
-        <img
-          src="{{ block.settings.image | img_url: '2000x' }}"
-          alt="{{ block.settings.alt | escape }}"
-          width="{{ block.settings.image.width }}"
-          height="{{ block.settings.image.height }}"
-          loading="lazy"
+        <a
+          class="slide"
+          href="{% if block.settings.collection != blank %}{{ block.settings.collection.url }}{% else %}#{% endif %}"
+          {{ block.shopify_attributes }}
         >
-      </a>
+          <img
+            src="{{ block.settings.image | image_url: width: 2000 }}"
+            alt="{{ block.settings.alt | escape }}"
+            width="{{ block.settings.image.width }}"
+            height="{{ block.settings.image.height }}"
+            loading="lazy"
+          >
+        </a>
       </div>
     {% endfor %}
 
