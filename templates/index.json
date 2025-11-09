@@ -9,33 +9,6 @@
  */
 {
   "sections": {
-    "custom_slideshow_dpfPVa": {
-      "type": "custom-slideshow",
-      "blocks": {
-        "slide_mxhhXe": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/3rd.1920_x_667px_9.jpg",
-            "alt": "",
-            "collection": ""
-          }
-        },
-        "slide_jdkgt4": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/3rd.1920_x_667px_9.jpg",
-            "alt": "",
-            "collection": ""
-          }
-        }
-      },
-      "block_order": [
-        "slide_mxhhXe",
-        "slide_jdkgt4"
-      ],
-      "name": "Custom Slideshow",
-      "settings": {}
-    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -66,7 +39,6 @@
     }
   },
   "order": [
-    "custom_slideshow_dpfPVa",
     "featured_collection"
   ]
 }
