@@ -6,7 +6,7 @@
       <a 
         class="slide"
         href="{% if block.settings.collection %}{{ block.settings.collection.url }}{% else %}#{% endif %}"
-       
+        {{ block.shopify_attributes }}
       >
         <img
           src="{{ block.settings.image | image_url: width: 2000 }}"
